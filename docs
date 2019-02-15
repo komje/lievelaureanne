@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Save the date</title>
+
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+        <style>
+            body {
+                background: #BF0B38;
+                color: #FFFFFF;
+                font-family: Ubuntu, "times new roman", times, roman, serif;
+            }
+
+            .flex-container {
+                font-size: 4vw;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+                height: 100vh;
+            }
+            
+        </style>
+
+        <script>
+            function getTimeUnitsBetween(startDate, endDate, timeUnitGetter, timeUnitSetter) {
+                var compDate = new Date(startDate.getTime());
+                var timeUnits = 0;
+
+                for(;;) {
+                    var tempDate = new Date(compDate.getTime());
+                    timeUnitSetter(tempDate, timeUnitGetter(compDate) + timeUnits + 1)
+
+                   
+                    if(tempDate.getTime() > endDate.getTime()) {
+                        break;
+                    }
+
+                    timeUnits++;
+                }
+
+                timeUnitSetter(startDate, timeUnitGetter(startDate) + timeUnits)
+
+                return timeUnits;
+            }
+
+            function getDateRange(startDate, endDate) {
+                var compDate = new Date(startDate.getTime());
+                var years = getTimeUnitsBetween(compDate, endDate, (date) => date.getFullYear(), (date, units) => date.setFullYear(units));
+                var days = getTimeUnitsBetween(compDate, endDate, (date) => date.getDate(), (date, units) => date.setDate(units));
+                var hours = getTimeUnitsBetween(compDate, endDate, (date) => date.getHours(), (date, units) => date.setHours(units));
+                var minutes = getTimeUnitsBetween(compDate, endDate, (date) => date.getMinutes(), (date, units) => date.setMinutes(units));
+                var seconds = getTimeUnitsBetween(compDate, endDate, (date) => date.getSeconds(), (date, units) => date.setSeconds(units));
+
+                return {
+                    years, days, hours, minutes, seconds
+                }
+            }
+
+            
+            function doCountDown() {
+                var countDownEl = document.getElementById("countDown");
+                var weddingDate = new Date(2028, 10, 17, 11, 0);
+                var dateRange = getDateRange(new Date, weddingDate)
+                
+                countDownEl.innerHTML = dateRange.years + " jaar, " + dateRange.days + (dateRange.days == 1 ? " dag, " : " dagen, ") + dateRange.hours + " uur, " + 
+                    dateRange.minutes + (dateRange.minutes == 1 ? "minuut en " : " minuten en ") +  dateRange.seconds + " seconden";
+            }
+
+            window.onload = function() {
+                doCountDown();
+
+                setInterval(doCountDown, 1000);
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="flex-container">
+            <div id="countDown">...</div>
+        </div>
+    </body>
+</html>
