@@ -18,6 +18,7 @@
                 justify-content: center;
                 align-items: center;
                 font-size: 5vw;
+                text-align: center
             }
             
             .unit {
@@ -69,7 +70,7 @@
                 countDownEl.innerHTML = dateRange.years + " <span class='unit'>jaar, </span>" + 
                     dateRange.days + (dateRange.days == 1 ? " <span class='unit'>dag, </span>" : " <span class='unit'>dagen, </span>") + 
                     dateRange.hours + "<span class='unit'> uur, </span>" + 
-                    dateRange.minutes + (dateRange.minutes == 1 ? "<span class='unit'>minuut en </span>" : " <span class='unit'>minuten en </span>") +  
+                    dateRange.minutes + (dateRange.minutes == 1 ? "<span class='unit'>minuut en </span>" : " <span class='unit'>minuten en </span>") +  "<br>" +
                     dateRange.seconds + " <span class='unit'>seconden</span>";
             }
 
