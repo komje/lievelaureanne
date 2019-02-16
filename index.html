@@ -5,21 +5,24 @@
 
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
         <style>
+            html, body {
+                height: 100%;
+            }
+            
             body {
                 background: #BF0B38;
                 color: #FFFFFF;
                 font-family: Ubuntu, "times new roman", times, roman, serif;
-            }
-
-            .flex-container {
-                font-size: 4vw;
                 display: flex;
-                justify-content: center;
                 flex-direction: column;
-                text-align: center;
-                height: 100vh;
+                justify-content: center;
+                align-items: center;
+                font-size: 5vw;
             }
             
+            .unit {
+                font-size: 3vw;
+            }
         </style>
 
         <script>
@@ -63,8 +66,11 @@
                 var weddingDate = new Date(2028, 10, 17, 11, 0);
                 var dateRange = getDateRange(new Date, weddingDate)
                 
-                countDownEl.innerHTML = dateRange.years + " jaar, " + dateRange.days + (dateRange.days == 1 ? " dag, " : " dagen, ") + dateRange.hours + " uur, " + 
-                    dateRange.minutes + (dateRange.minutes == 1 ? "minuut en " : " minuten en ") +  dateRange.seconds + " seconden";
+                countDownEl.innerHTML = dateRange.years + " <span class='unit'>jaar, </span>" + 
+                    dateRange.days + (dateRange.days == 1 ? " <span class='unit'>dag, </span>" : " <span class='unit'>dagen, </span>") + 
+                    dateRange.hours + "<span class='unit'> uur, </span>" + 
+                    dateRange.minutes + (dateRange.minutes == 1 ? "<span class='unit'>minuut en </span>" : " <span class='unit'>minuten en </span>") +  
+                    dateRange.seconds + " <span class='unit'>seconden</span>";
             }
 
             window.onload = function() {
@@ -76,8 +82,8 @@
     </head>
 
     <body>
-        <div class="flex-container">
-            <div id="countDown">...</div>
+        <div id="countDown">
+            ...
         </div>
     </body>
 </html>
